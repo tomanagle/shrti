@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+
+  # app:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: .
+
+  tls-check:
+    image: golang:1.19
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 5555:5555
+    volumes:
+      - ./tls-check:/tls-check
+    command: sh -c "ls && cd /tls-check && nohup sh ./build.sh"
+
+  redirect:
+    image: golang:1.19
+    ports:
+      - 4000:4000
+    volumes:
+      - ./redirect-service:/redirect-service
+    command: sh -c "ls && cd /redirect-service && nohup sh ./build.sh"
+
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:            
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config: 

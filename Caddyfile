@@ -1,0 +1,20 @@
+{
+    on_demand_tls {
+        ask      tls-check:5555
+        interval 2m
+        burst    1
+    }
+}
+
+(SecurityHeaders) {
+  header_up X-Real-IP {remote_host}
+  header_up X-Forwarded-Proto {scheme}
+}
+
+
+https:// {
+    tls {
+        on_demand
+    }
+    reverse_proxy redirect:4000
+}
