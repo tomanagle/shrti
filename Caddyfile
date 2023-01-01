@@ -1,6 +1,6 @@
 {
     on_demand_tls {
-        ask      tls-check:5555
+        ask      http://0.0.0.0:5555
         interval 2m
         burst    5
     }
@@ -16,5 +16,5 @@ https:// {
     tls {
         on_demand
     }
-    reverse_proxy redirect:4000
+    reverse_proxy 0.0.0.0:4000
 }
