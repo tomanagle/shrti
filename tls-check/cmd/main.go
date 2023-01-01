@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	allowedDomains := []string{"shrti.xyz", "shrti.io"}
+	allowedDomains := []string{"shrti.xyz", "shrti.io", "localhost"}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
