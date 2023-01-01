@@ -2,7 +2,7 @@
         debug
 
         on_demand_tls {
-                ask http://localhost:5555
+                ask http://tls-check:5555
                 interval 2m
                 burst 5
         }  
