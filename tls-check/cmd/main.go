@@ -7,16 +7,20 @@ import (
 
 func main() {
 
+	allowedDomains := []string{"shrti.xyz", "shrti.io"}
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
 		if r.Method == "GET" {
 
 			q := r.URL.Query()
 
-			if q.Get("domain") == "tomdoestech.com" {
-				w.WriteHeader(http.StatusOK)
-				fmt.Fprintf(w, "OK")
-				return
+			for _, domain := range allowedDomains {
+				if q.Get("domain") == domain {
+					w.WriteHeader(http.StatusOK)
+					fmt.Fprintf(w, "OK")
+					return
+				}
 			}
 
 			w.WriteHeader(http.StatusNotFound)
