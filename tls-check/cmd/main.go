@@ -19,9 +19,14 @@ func main() {
 				if q.Get("domain") == domain {
 					w.WriteHeader(http.StatusOK)
 					fmt.Fprintf(w, "OK")
+
+					fmt.Println("Allowing domain: " + q.Get("domain"))
+
 					return
 				}
 			}
+
+			fmt.Println("Domain not found: " + q.Get("domain"))
 
 			w.WriteHeader(http.StatusNotFound)
 			return
