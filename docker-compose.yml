@@ -3,9 +3,6 @@ services:
 
   tls-check:
     image: golang:1.19
-    build:
-      dockerfile: Dockerfile
-      context: .
     ports:
       - 5555:5555
     volumes:
