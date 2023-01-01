@@ -2,7 +2,7 @@
     on_demand_tls {
         ask      tls-check:5555
         interval 2m
-        burst    1
+        burst    5
     }
 }
 

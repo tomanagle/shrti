@@ -1,11 +1,6 @@
 version: "3.9"
 services:
 
-  # app:
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: .
-
   tls-check:
     image: golang:1.19
     build:
@@ -15,7 +10,7 @@ services:
       - 5555:5555
     volumes:
       - ./tls-check:/tls-check
-    command: sh -c "ls && cd /tls-check && nohup sh ./build.sh"
+    command: sh -c "cd /tls-check && nohup sh ./build.sh"
 
   redirect:
     image: golang:1.19
@@ -23,7 +18,7 @@ services:
       - 4000:4000
     volumes:
       - ./redirect-service:/redirect-service
-    command: sh -c "ls && cd /redirect-service && nohup sh ./build.sh"
+    command: sh -c "cd /redirect-service && nohup sh ./build.sh"
 
   caddy:
     image: caddy/caddy:2.2.1-alpine
