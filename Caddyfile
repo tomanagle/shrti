@@ -1,20 +1,20 @@
 {
     on_demand_tls {
-        ask      http://0.0.0.0:5555
+        ask      http://localhost:5555
         interval 2m
         burst    5
     }
 }
 
-(SecurityHeaders) {
-  header_up X-Real-IP {remote_host}
-  header_up X-Forwarded-Proto {scheme}
-}
+# (SecurityHeaders) {
+#   header_up X-Real-IP {remote_host}
+#   header_up X-Forwarded-Proto {scheme}
+# }
 
 
-:443 {
+https:// {
     tls {
         on_demand
     }
-    reverse_proxy 0.0.0.0:4000
+    reverse_proxy localhost:4000
 }
